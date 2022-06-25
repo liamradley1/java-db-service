@@ -6,6 +6,8 @@ import com.example.funddbservice.service.FundDbService;
 import com.example.funddbservice.utils.ListUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+
 import java.util.concurrent.CompletableFuture;
 
 public class FundDbServiceImpl implements FundDbService {
@@ -14,22 +16,23 @@ public class FundDbServiceImpl implements FundDbService {
     FundRepositoryImpl fundRepositoryImpl;
 
     @SneakyThrows
-    public Iterable<Fund> getAllFunds() {
-        CompletableFuture<Iterable<Fund>> funds = CompletableFuture.supplyAsync(() -> fundRepositoryImpl.findAll());
-        return funds.get();
+    @Async
+    public CompletableFuture<Iterable<Fund>> getAllFunds() {
+        return CompletableFuture.supplyAsync(() -> fundRepositoryImpl.findAll());
     }
 
     @SneakyThrows
-    public Fund getFundInfo(Long fundId) {
-        CompletableFuture<Fund> getFund = CompletableFuture.supplyAsync(() -> fundRepositoryImpl.findById(fundId).orElse(null));
-        return getFund.get();
+    @Async
+    public CompletableFuture<Fund> getFundInfo(Long fundId) {
+        return CompletableFuture.supplyAsync(() -> fundRepositoryImpl.findById(fundId).orElse(null));
     }
 
     @SneakyThrows
-    public Fund addFundInfo(Fund fund) {
+    @Async
+    public CompletableFuture<Fund> addFundInfo(Fund fund) {
 
         CompletableFuture<Boolean> containsFund = CompletableFuture
-                .supplyAsync(this::getAllFunds)
+                .supplyAsync(this::getAllFunds).join()
                 .thenApplyAsync(fundsIterable -> ListUtils.getListFromIterator(fundsIterable.iterator()))
                 .thenApplyAsync(fundList -> fundList.contains(fund));
 
@@ -39,20 +42,19 @@ public class FundDbServiceImpl implements FundDbService {
             } catch (Exception e) {
                 return null;
             }
-        }).get();
+        });
     }
 
     @SneakyThrows
-    public Fund updateFundInfo(Long fundId, Fund fundToSave) {
-        CompletableFuture<Fund> fund = CompletableFuture
-                .supplyAsync(() -> getFundInfo(fundId))
+    @Async
+    public CompletableFuture<Fund> updateFundInfo(Long fundId, Fund fundToSave) {
+        return CompletableFuture
+                .supplyAsync(() -> getFundInfo(fundId).join())
                 .thenApplyAsync(result -> {
                     if(result != null) {
-                        fundToSave.setFundId(fundId);
-                        result = fundToSave;
+                        result.setFundValue(fundToSave.getFundValue());
                     }
                     return result;
                 }).thenApplyAsync(alteredFund -> alteredFund != null? fundRepositoryImpl.save(fundToSave) : null);
-        return fund.get();
     }
 }

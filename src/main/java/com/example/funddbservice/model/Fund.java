@@ -1,21 +1,25 @@
 package com.example.funddbservice.model;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Objects;
+
 @Entity
+@Table(name = "fund")
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fund {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fundId;
 
     @NonNull
@@ -29,15 +33,14 @@ public class Fund {
 
     @Override
     public boolean equals(Object o) {
-        if(o == this) {
-            return true;
-        }
-
-        if(!(o instanceof Fund castObject)) {
-            return false;
-        }
-
-        return castObject.symbol.equals(this.symbol);
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Fund fund = (Fund) o;
+        return Objects.equals(fundId, fund.fundId) || symbol.equals(fund.getSymbol());
     }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
