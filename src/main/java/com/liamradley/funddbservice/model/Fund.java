@@ -1,15 +1,11 @@
-package com.example.funddbservice.model;
+package com.liamradley.funddbservice.model;
 
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Builder
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fund {

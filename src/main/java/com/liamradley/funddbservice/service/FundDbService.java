@@ -1,6 +1,6 @@
-package com.example.funddbservice.service;
+package com.liamradley.funddbservice.service;
 
-import com.example.funddbservice.model.Fund;
+import com.liamradley.funddbservice.model.Fund;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

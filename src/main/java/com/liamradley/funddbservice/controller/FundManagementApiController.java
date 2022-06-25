@@ -1,7 +1,7 @@
-package com.example.funddbservice.controller;
+package com.liamradley.funddbservice.controller;
 
-import com.example.funddbservice.model.Fund;
-import com.example.funddbservice.service.FundDbService;
+import com.liamradley.funddbservice.model.Fund;
+import com.liamradley.funddbservice.service.FundDbService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
-import static com.example.funddbservice.common.constants.Constants.*;
+import static com.liamradley.funddbservice.common.constants.Constants.*;
 
 @RestController
 public class FundManagementApiController {

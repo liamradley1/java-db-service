@@ -1,4 +1,4 @@
-package com.example.funddbservice;
+package com.liamradley.funddbservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

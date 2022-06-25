@@ -1,15 +1,16 @@
-package com.example.funddbservice.service.impl;
+package com.liamradley.funddbservice.service.impl;
 
-import com.example.funddbservice.dao.FundRepository;
-import com.example.funddbservice.model.Fund;
-import com.example.funddbservice.service.FundDbService;
+import com.liamradley.funddbservice.dao.FundRepository;
+import com.liamradley.funddbservice.model.Fund;
+import com.liamradley.funddbservice.service.FundDbService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+@Service
 public class FundDbServiceImpl implements FundDbService {
 
     @Autowired

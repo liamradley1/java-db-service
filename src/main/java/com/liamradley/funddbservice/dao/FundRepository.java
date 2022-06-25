@@ -1,6 +1,6 @@
-package com.example.funddbservice.dao;
+package com.liamradley.funddbservice.dao;
 
-import com.example.funddbservice.model.Fund;
+import com.liamradley.funddbservice.model.Fund;
 
 import java.util.List;
 

@@ -1,22 +1,20 @@
-package com.example.funddbservice.dao.impl;
+package com.liamradley.funddbservice.dao.impl;
 
-import com.example.funddbservice.dao.FundRepository;
-import com.example.funddbservice.model.Fund;
+import com.liamradley.funddbservice.dao.FundRepository;
+import com.liamradley.funddbservice.model.Fund;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository
-public class FundRepositoryImpl implements FundRepository{
+@Service
+public class FundRepositoryImpl implements FundRepository {
 
     @Autowired(required = false)
     JdbcTemplate jdbcTemplate;
@@ -30,7 +28,7 @@ public class FundRepositoryImpl implements FundRepository{
     @Override
     public Fund findBySymbol(String fundSymbol) {
         String sql = "SELECT * FROM fund WHERE symbol = ?";
-        return jdbcTemplate.queryForObject(sql, Fund.class, fundSymbol);
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Fund.class), fundSymbol);
     }
 
     @Override

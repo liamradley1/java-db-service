@@ -1,4 +1,4 @@
-package com.example.funddbservice.common.constants;
+package com.liamradley.funddbservice.common.constants;
 
 public class Constants {
     public static final String GET_ALL_FUNDS_ENDPOINT = "/get-funds";
