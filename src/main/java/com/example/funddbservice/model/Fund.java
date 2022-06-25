@@ -1,14 +1,10 @@
 package com.example.funddbservice.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "fund")
 @Builder
 @Getter
 @Setter
@@ -17,9 +13,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fund {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fundId;
 
     @NonNull
@@ -34,9 +27,9 @@ public class Fund {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Fund fund = (Fund) o;
-        return Objects.equals(fundId, fund.fundId) || symbol.equals(fund.getSymbol());
+        return fundName.equalsIgnoreCase(fund.fundName) || symbol.equals(fund.getSymbol()) || fundId.equals(fund.fundId);
     }
 
     @Override
