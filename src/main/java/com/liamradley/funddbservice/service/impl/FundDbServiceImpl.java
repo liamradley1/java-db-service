@@ -1,7 +1,7 @@
 package com.liamradley.funddbservice.service.impl;
 
+import com.liamradley.commonutils.model.Fund;
 import com.liamradley.funddbservice.dao.FundRepository;
-import com.liamradley.funddbservice.model.Fund;
 import com.liamradley.funddbservice.service.FundDbService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class FundDbServiceImpl implements FundDbService {
 
     @Override
     @SneakyThrows
-    public CompletableFuture<Iterable<Fund>> getAllFunds() {
+    public CompletableFuture<List<Fund>> getAllFunds() {
         return CompletableFuture.supplyAsync(() -> fundRepository.findAll());
     }
 

@@ -1,6 +1,7 @@
 package com.liamradley.funddbservice.dao;
 
-import com.liamradley.funddbservice.model.Fund;
+
+import com.liamradley.commonutils.model.Fund;
 
 import java.util.List;
 

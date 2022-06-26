@@ -1,7 +1,7 @@
 package com.liamradley.funddbservice.dao.impl;
 
+import com.liamradley.commonutils.model.Fund;
 import com.liamradley.funddbservice.dao.FundRepository;
-import com.liamradley.funddbservice.model.Fund;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;

@@ -1,6 +1,6 @@
 package com.liamradley.funddbservice.controller;
 
-import com.liamradley.funddbservice.model.Fund;
+import com.liamradley.commonutils.model.Fund;
 import com.liamradley.funddbservice.service.FundDbService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.liamradley.funddbservice.common.constants.Constants.*;
+import static com.liamradley.commonutils.constants.Constants.*;
+
 
 @RestController
 public class FundManagementApiController {
@@ -20,8 +21,8 @@ public class FundManagementApiController {
 
     @GetMapping(GET_ALL_FUNDS_ENDPOINT)
     @SneakyThrows
-    public ResponseEntity<Iterable<Fund>> getAllFunds() {
-        Iterable<Fund> funds = fundDbService.getAllFunds().get();
+    public ResponseEntity<List<Fund>> getAllFunds() {
+        List<Fund> funds = fundDbService.getAllFunds().get();
         return new ResponseEntity<>(funds, HttpStatus.OK);
     }
 
